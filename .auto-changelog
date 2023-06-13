@@ -4,5 +4,6 @@
   "package":true,
   "unreleased": true,
   "commitLimit": false,
-  "commit-pattern":"🚀tw"
+  "commit-pattern":"/🚀tw/",
+  "append-git-log":"stash"
 }
