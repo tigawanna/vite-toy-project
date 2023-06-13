@@ -1,0 +1,8 @@
+{
+  "output": "CHANGELOG.md",
+  "template": "keepachangelog",
+  "package":true,
+  "unreleased": true,
+  "commitLimit": false,
+  "commit-pattern":"🚀tw"
+}
