@@ -1,17 +1,23 @@
 import { useState } from "react";
-import { Accordion } from "shadcn-fe-ui"
-import {  Button  } from "shadcn-fe-ui/button"
-
 import "./App.css";
+import { AppWrapper } from "./components/root/AppWrapper";
+
+
 
 function App() {
   const [count, setCount] = useState(0);
   return (
-    <div>
-      Hello
-      <br/>
-      <Button variant="ghost" size="default" className="bg-accent">Click me</Button>
+    <div className="bg-primary min-h-screen">
+  <AppWrapper>
+  <div className="h-screen overflow-y-scroll  w-full flex items-center justify-center bg-red-900 text-9xl font-bold ">
+  Main content
+  </div>
+    </AppWrapper>
+
+
     </div>
+
+
   );
 }
 

@@ -8,16 +8,28 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "upgrade-deps": "npm install -g npm-check-updates && ncu -u && npm install"
+    "upgrade-deps": "npm install -g npm-check-updates && ncu -u && npm install",
+    "shadd": "shadcn-fe-cli add"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.4",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@tanstack/react-query": "^5.0.0-alpha.35",
+    "class-variance-authority": "^0.6.0",
+    "clsx": "^1.2.1",
+    "dayjs": "^1.11.8",
+    "lucide-react": "^0.244.0",
+    "npm-test": "link:C:/Users/denni/Desktop/code/npm/buttons",
+    "pocketbase": "^0.15.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "shadcn-fe-tw": "link:C:/Users/denni/Desktop/code/workspace/shadcn-ui-fanedition/packages/tw",
     "shadcn-fe-ui": "link:C:/Users/denni/Desktop/code/workspace/shadcn-ui-fanedition/packages/ui",
-    "test-ui": "link:C:/Users/denni/Desktop/code/vite/ui"
+    "tailwind-merge": "^1.13.2"
   },
   "devDependencies": {
+    "@tanstack/react-query-devtools": "^5.0.0-alpha.35",
     "@types/leaflet": "^1.9.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
@@ -25,15 +37,24 @@
     "@typescript-eslint/parser": "^5.57.1",
     "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.14",
-    "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "kleur": "^4.1.5",
     "postcss": "^8.4.24",
+    "shadcn-fe-cli": "link:C:/Users/denni/Desktop/code/workspace/shadcn-ui-fanedition/packages/cli",
     "tailwindcss": "^3.3.2",
     "tailwindcss-animate": "^1.0.6",
     "typescript": "^5.0.2",
     "vite": "^4.3.2",
     "vitest": "^0.32.0"
+  },
+  "auto-changelog": {
+    "output": "CHANGELOG.md",
+    "template": "keepachangelog",
+    "package": true,
+    "unreleased": true,
+    "commitLimit": false,
+    "commit-pattern": "/tw/",
+    "append-git-log": "stash"
   }
 }
