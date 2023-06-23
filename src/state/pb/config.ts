@@ -11,7 +11,7 @@ export type PB = typeof pb;
 
 export async function getUser() {
   try {
-    pb.authStore.loadFromCookie(document?.cookie ?? "");
+    // pb.authStore.loadFromCookie(document?.cookie ?? "");
     return pb.authStore.model;
   } catch (error) {
     throw error;
@@ -34,6 +34,7 @@ export async function loginUser({ user, password }: ILoginUser) {
     throw error;
   }
 }
+
 
 interface IOuthLogin {
   provider: "google" | "github";
