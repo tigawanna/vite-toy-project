@@ -1,6 +1,7 @@
+import { PB } from "@/state/pb/config"
 import { PBUserRecord } from "@/state/user"
 
-export interface IFollowerRecord {
+export interface FriendRecord {
     collectionId: string
     collectionName: string
     created: string
@@ -14,8 +15,13 @@ export interface IFollowerRecord {
 }
 
 export interface Expand {
-    user_a:PBUserRecord
-    user_b:PBUserRecord
+    user_a: PBUserRecord
+    user_b: PBUserRecord
 }
 
 
+export interface FollowUserMutaionProps {
+    pb: PB;
+    user_a: string;
+    user_b: string;
+}

@@ -14,6 +14,7 @@ import { useState } from "react";
 import { Friends } from "../friends/Friends";
 import { Loader } from "lucide-react";
 import { PBUserRecord } from "@/state/user";
+import { Following } from "../friends/Following";
 
 
 
@@ -67,6 +68,7 @@ if(user.isPending){
           </div>
           {/* <div className="w-full h-screen overflow-y-scroll scroll-bar">{children}</div> */}
           <div className="w-full h-full flex items-center justify-center">
+        <Following user={user.data as unknown as PBUserRecord} />
         <Friends user={user.data as unknown as PBUserRecord}/>
           </div>
         </div>

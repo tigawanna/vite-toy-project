@@ -8,14 +8,14 @@ import Image from "../wrappers/Image";
 import { IFollowerRecord } from "@/state/models/followers/types";
 
 
-interface FriendsProps {
+interface FollowersProps {
   user: PBUserRecord;
 }
 
-export function Friends({ user }: FriendsProps) {
+export function Followers({ user }: FollowersProps) {
 
   const query = useQuery({
-    queryKey: ["freinds"],
+    queryKey: ["followers"],
     queryFn: () => getFollowers(pb, user.id),
   });
 
@@ -24,7 +24,7 @@ export function Friends({ user }: FriendsProps) {
     return (
       <div
         className="w-full h-full flex flex-col items-center justify-center bg-red-900 text-red-300 rounded-lg p-5">
-        loading friends
+        loading Followers
       </div>
     );
   }
@@ -35,7 +35,7 @@ export function Friends({ user }: FriendsProps) {
         className="w-full h-full flex flex-col items-center justify-center bg-red-900 text-red-300
 rounded-lg p-5
 ">
-        error loading friends {query.error?.message}
+        error loading Followers {query.error?.message}
       </div>
     );
   }
@@ -46,27 +46,27 @@ rounded-lg p-5
         className="w-full h-full flex flex-col items-center justify-center text-lg
 rounded-lg p-5
 ">
-        no friends
+        no Followers
       </div>
     );
   }
 
-  const freinds = query.data;
+  const followers = query.data;
  
   
   
   return (
     <div className="w-full h-full flex flex-col items-center justify-center p-4">
         
-      {freinds.items.map((friend) => {
-          const follower = friend.expand.user_a.id === user.id ? friend.expand.user_b : friend.expand.user_a
+      {followers.items.map((fwr) => {
+          const follower = fwr.expand.user_a.id === user.id ? fwr.expand.user_b : fwr.expand.user_a
         return (
           <div
             className="w-full flex flex-col md:flex-row items-center  gap-2 p-2 bg-secondary
             rounded-lg border border-accent shadow" 
-            key={friend.id}>
+            key={follower.id}>
             <Image
-             src={friend.expand.user_b.avatar}
+             src={follower.avatar}
              alt="avatar"
              className="w-16 h-16 rounded-full "
              height={50}
@@ -78,7 +78,7 @@ rounded-lg p-5
             <div className="flex gap-1 items-center"><Mail className="h-3 w-3"/>{follower.email} </div>
             </div>
             <div className="flex items-center justify-center">
-            <FollowButton friend={friend} />
+            <FollowButton follower={fwr} me={user}/>
            </div>
             </div>
 
@@ -91,30 +91,68 @@ rounded-lg p-5
 
 
 interface FollowButtonProps {
-    friend: IFollowerRecord
+    follower: IFollowerRecord;
+    me: PBUserRecord;
+
 }
 
-export function FollowButton({friend}:FollowButtonProps){
-    if (friend.user_a_follow_user_b === "no" && friend.user_b_follow_user_a === "yes"){
-        return(
-            <Button>follow back</Button>
-        )
-    }
-    if (friend.user_a_follow_user_b === "no"){
-        return(
-            <Button>follow</Button>
-        )
-    }
-    if ((friend.user_a_follow_user_b === "yes" && friend.user_b_follow_user_a === "yes")){
-        return(
-                <Button>Unfollow</Button>
-        )
-    }
-    if(friend.user_a_follow_user_b === "yes"){
-        return(
-            <Button>Unfollow</Button>
+export function FollowButton({follower,me}:FollowButtonProps){
+  const am_user_a  = me.id === follower.user_a
+
+  if(am_user_a){
+  // if (follower.user_a_follow_user_b === "no" && follower.user_b_follow_user_a === "yes") {
+  //   return (
+  //     <Button>follow back</Button>
+  //   )
+  // }
+  
+     //  am not following my follower
+  if (follower.user_a_follow_user_b === "no") {
+    return (
+      <Button>follow</Button>
     )
+  }
+  // if ((follower.user_a_follow_user_b === "yes" && follower.user_b_follow_user_a === "yes")) {
+  //   return (
+  //     <Button>Unfollow</Button>
+  //   )
+  // }
+
+  // am following my follower
+  if (follower.user_a_follow_user_b === "yes") {
+    return (
+      <Button>Unfollow</Button>
+    )
+  }
+}else{
+    //  am not following my follower and user following me
+    // if (follower.user_b_follow_user_a === "no" && follower.user_a_follow_user_b === "yes") {
+    //   return (
+    //     <Button>follow back</Button>
+    //   )
+    // }
+   //  am not following my follower
+    if (follower.user_b_follow_user_a === "no") {
+      return (
+        <Button>follow back</Button>
+      )
     }
+    // mutually followig each other
+    // if ((follower.user_b_follow_user_a === "yes" && follower.user_a_follow_user_b === "yes")) {
+    //   return (
+    //     <Button>Unfollow</Button>
+    //   )
+    // }
+
+    // am following my follower
+    if (follower.user_b_follow_user_a === "yes") {
+      return (
+        <Button>Unfollow</Button>
+      )
+    }
+}
+
+
 return (
  <div className='w-full h-full flex items-center justify-center'>
     <LucideFileWarning className="h-3 w-3 text-red-600"/>

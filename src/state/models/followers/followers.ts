@@ -1,25 +1,17 @@
 import { PB } from "@/state/pb/config";
 import { logError } from "@/state/utils/color_logs";
-import { IFriendRecord } from "./types";
+import { IFollowerRecord } from "./types";
+
 
 
 export async function getFollowers(pb:PB,user_id:string){
     // console.log("user id  == ",user_id)
 try {
-    const resultList = await pb.collection('followers').getList<IFriendRecord>(1, 20, {
-        filter: `user_a.id="${user_id}"`,
+    const resultList = await pb.collection('followers').getList<IFollowerRecord>(1, 20, {
+        filter: `(user_a.id="${user_id}"||user_b.id="${user_id}")&&(user_a_follow_user_b="yes"||user_b_follow_user_a="yes")`,
         expand: 'user_a,user_b',
     });
-    // pb.beforeSend = function (url, options) {
-    //     // For list of the possible request options properties check
-    //     // https://developer.mozilla.org/en-US/docs/Web/API/fetch#options
-    //     // options.headers = Object.assign({}, options.headers, {
-    //     //     'X-Custom-Header': 'example',
-    //     // });
-    //     console.log("url sending to  === ",url)
 
-    //     return { url, options };
-    // };
     return resultList;
 } catch (error: any) {
     console.log("error getting followers",error);
