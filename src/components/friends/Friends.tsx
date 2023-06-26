@@ -1,123 +1,29 @@
-import { Button } from "@/shadcn/ui/button";
-import { getFollowers } from "@/state/models/followers/followers";
-import { PBUserRecord } from "@/state/models/user/types";
-import { pb } from "@/state/pb/config";
-import { useQuery } from "@tanstack/react-query";
-import { LucideFileWarning, Mail } from "lucide-react";
-import Image from "../wrappers/Image";
-import { IFollowerRecord } from "@/state/models/followers/types";
-
+import { PBUserRecord } from "@/state/user";
+import { InfiniteFriends } from "./InfiniteFriends";
+import { useState } from "react";
 
 interface FriendsProps {
-  user: PBUserRecord;
+user:PBUserRecord
 }
 
-export function Friends({ user }: FriendsProps) {
-
-  const query = useQuery({
-    queryKey: ["freinds"],
-    queryFn: () => getFollowers(pb, user.id),
-  });
-
-
-  if (query.isLoading) {
-    return (
-      <div
-        className="w-full h-full flex flex-col items-center justify-center bg-red-900 text-red-300 rounded-lg p-5">
-        loading friends
-      </div>
-    );
-  }
-
-  if (query.error) {
-    return (
-      <div
-        className="w-full h-full flex flex-col items-center justify-center bg-red-900 text-red-300
-rounded-lg p-5
-">
-        error loading friends {query.error?.message}
-      </div>
-    );
-  }
-
-  if (!query.data || (query.data && query.data.items.length === 0)) {
-    return (
-      <div
-        className="w-full h-full flex flex-col items-center justify-center text-lg
-rounded-lg p-5
-">
-        no friends
-      </div>
-    );
-  }
-
-  const freinds = query.data;
- 
-  
-  
-  return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-4">
-        
-      {freinds.items.map((friend) => {
-          const follower = friend.expand.user_a.id === user.id ? friend.expand.user_b : friend.expand.user_a
-        return (
-          <div
-            className="w-full flex flex-col md:flex-row items-center  gap-2 p-2 bg-secondary
-            rounded-lg border border-accent shadow" 
-            key={friend.id}>
-            <Image
-             src={friend.expand.user_b.avatar}
-             alt="avatar"
-             className="w-16 h-16 rounded-full "
-             height={50}
-             width={50}
-             />
-             <div className="w-fit sm:w-full flex flex-col sm:flex-row justify-between px-5 text-sm">
-            <div className="flex flex-col px-3 pl-5">
-            <div className="flex gap-1 items-center">@{follower.email} </div>
-            <div className="flex gap-1 items-center"><Mail className="h-3 w-3"/>{follower.email} </div>
-            </div>
-            <div className="flex items-center justify-center">
-            <FollowButton friend={friend} />
-           </div>
-            </div>
-
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-
-interface FollowButtonProps {
-    friend: IFollowerRecord
-}
-
-export function FollowButton({friend}:FollowButtonProps){
-    if (friend.user_a_follow_user_b === "no" && friend.user_b_follow_user_a === "yes"){
-        return(
-            <Button>follow back</Button>
-        )
-    }
-    if (friend.user_a_follow_user_b === "no"){
-        return(
-            <Button>follow</Button>
-        )
-    }
-    if ((friend.user_a_follow_user_b === "yes" && friend.user_b_follow_user_a === "yes")){
-        return(
-                <Button>Unfollow</Button>
-        )
-    }
-    if(friend.user_a_follow_user_b === "yes"){
-        return(
-            <Button>Unfollow</Button>
-    )
-    }
+export function Friends({user}:FriendsProps){
+  const tabs = ["following","followers"] as const
+  const [tab,setTab] = useState<typeof tabs[number]>(tabs[0])
 return (
- <div className='w-full h-full flex items-center justify-center'>
-    <LucideFileWarning className="h-3 w-3 text-red-600"/>
- </div>
+  <div className="w-full h-full flex flex-col items-center justify-center p-4 gap-1">
+  
+  <div className="w-full flex items-center justify-center gap-2">
+    {tabs.map((item)=>{
+      return (
+      <button 
+      key={item}
+      onClick={()=>setTab(item)}
+      style={{backgroundColor:tab===item?"green":""}}
+      className="text-xl font-bold hover:shadow-accent-foreground hover:shadow-md px-3 py-2 border">{item}</button>
+      )
+    })}
+  </div>
+    <InfiniteFriends user={user} type={tab} logged_in={user} />
+  </div>
 );
 }

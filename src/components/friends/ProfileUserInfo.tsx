@@ -59,3 +59,109 @@ export function ProfileUserInfo({ data,logged_in_user }: ProfileUserInfoProps) {
     </div>
   );
 }
+
+
+// interface FollowButtonProps {
+//   friendship: CustomFriendsType;
+//   me: PBUserRecord;
+
+// }
+
+// export function FollowButton({ friendship, me }: FollowButtonProps) {
+//   type UseMutReturn = Awaited<ReturnType<typeof updateFriendship>>
+//   type UseMutParams = Awaited<Parameters<typeof updateFriendship>>[0]
+
+//   const follow_mutation = useMutation<UseMutReturn, Error, UseMutParams, unknown>({
+//     mutationFn: (vars) => updateFriendship(vars),
+//   })
+//   const am_user_a = me.id === friendship.user_a
+
+//   if (am_user_a) {
+//     //  am not following my friendship
+//     if (friendship.user_a_follow_user_b === "no") {
+//       console.log("am not following my friend")
+//       return (
+//         <AsyncButton
+//           is_loading={follow_mutation.isPending}
+//           disabled={follow_mutation.isPending}
+//           className="text-red-400"
+//           onClick={() => follow_mutation.mutate({
+//             pb,
+//             friendship: {
+//               user_a_follow_user_b: "yes",
+//             },
+//             friendship_id: friendship.friendship_id
+//           })}>
+//           Follow Back
+//         </AsyncButton>
+//       )
+//     }
+//     // am following my friendship
+//     if (friendship.user_a_follow_user_b === "yes") {
+//       console.log("am following my friendship")
+//       return (
+//         <AsyncButton
+//           is_loading={follow_mutation.isPending}
+//           disabled={follow_mutation.isPending}
+//           className="text-red-400"
+//           onClick={() => follow_mutation.mutate({
+//             pb,
+//             friendship: {
+//               user_a_follow_user_b: "no",
+//             },
+//             friendship_id: friendship.friendship_id
+//           })}>
+//           Unfollow
+//         </AsyncButton>
+//       )
+//     }
+//   } else {
+
+//     //  am not following my friendship
+//     if (friendship.user_b_follow_user_a === "no") {
+//       console.log("am not following my friendship")
+//       return (
+//         <AsyncButton
+//           is_loading={follow_mutation.isPending}
+//           disabled={follow_mutation.isPending}
+//           className="text-red-400"
+//           onClick={() => follow_mutation.mutate({
+//             pb,
+//             friendship: {
+//               user_b_follow_user_a: "yes",
+//             },
+//             friendship_id: friendship.friendship_id
+//           })}>
+//           Follow Back
+//         </AsyncButton>
+//       )
+//     }
+
+//     // am following my friendship
+//     if (friendship.user_b_follow_user_a === "yes") {
+//       console.log("am following my friendship")
+//       return (
+//         <AsyncButton
+//           is_loading={follow_mutation.isPending}
+//           disabled={follow_mutation.isPending}
+//           className="text-red-400"
+//           onClick={() => follow_mutation.mutate({
+//             pb,
+//             friendship: {
+//               user_b_follow_user_a: "no",
+//             },
+//             friendship_id: friendship.friendship_id
+//           })}>
+//           Unfollow
+//         </AsyncButton>
+//       )
+//     }
+//   }
+
+//   console.log("fall through case  === ", friendship)
+//   return (
+//     <div className='w-full h-full flex items-center justify-center'>
+//       <LucideFileWarning className="h-3 w-3 text-red-600" />
+//     </div>
+//   );
+// }

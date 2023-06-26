@@ -9,6 +9,13 @@ import {
 export const pb = new PocketBase(pb_url);
 export type PB = typeof pb;
 
+export type PBErrorDataMessage<T> = {
+  [key in keyof T]: {
+    code: string
+    message: string
+  }
+}
+
 export async function getUser() {
   try {
     // pb.authStore.loadFromCookie(document?.cookie ?? "");

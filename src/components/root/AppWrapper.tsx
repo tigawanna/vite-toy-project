@@ -15,6 +15,7 @@ import { Friends } from "../friends/Friends";
 import { Loader } from "lucide-react";
 import { PBUserRecord } from "@/state/user";
 import { Following } from "../friends/Following";
+import { Followers } from "../friends/Followers";
 
 
 
@@ -67,10 +68,10 @@ if(user.isPending){
             <Sidebar theme={theme}/>
           </div>
           {/* <div className="w-full h-screen overflow-y-scroll scroll-bar">{children}</div> */}
-          <div className="w-full h-full flex items-center justify-center">
-        <Following user={user.data as unknown as PBUserRecord} />
-        <Friends user={user.data as unknown as PBUserRecord}/>
-          </div>
+        <div className="w-full h-full flex items-center justify-center">
+        <Friends user={user.data as unknown as PBUserRecord} />
+ 
+        </div>
         </div>
 
 

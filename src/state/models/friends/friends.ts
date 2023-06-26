@@ -1,5 +1,5 @@
 import { PB } from "@/state/pb/config";
-import { FollowUserMutaionProps, FriendRecord } from "./types";
+import {  CreateFrienshipMutaionProps, FriendRecord, UpdateFriendShipMutationProps } from "./types";
 
 
 export async function getFollowing(pb: PB, user_id: string) {
@@ -44,24 +44,35 @@ export async function getFollowers(pb: PB, user_id: string) {
 }
 
 
-export async function followUser({pb,user_a,user_b}: FollowUserMutaionProps) {
+export async function createFriendship({pb,me,them}: CreateFrienshipMutaionProps) {
     try {
-        const new_friend = await pb.collection('friend').create({
-            user_a,
-            user_b,
+        const new_friend = await pb.collection('friends').create({
+            user_a: me,
+            user_b: them,
             user_a_follow_user_b: "yes",
             user_b_follow_user_a: "no",
 
         });
-    if(new_friend instanceof Error){
-         console.log("error getting ceaing new friend",new_friend)
-
-    }
-
+        return new_friend
     } catch (error: any) {
-        console.log(`error following user: ${user_b} `, error);
-        return new Error(error);
+        console.log(`error following user: ${them} `, error.data);
+        throw new Error(error);
 
     }
 
-}
+} 
+
+
+
+
+export async function updateFriendship({ pb,friendship_id,friendship }:UpdateFriendShipMutationProps) {
+    try {
+        const new_friend = await pb.collection('friends').update(friendship_id,friendship);
+        return new_friend
+    } catch (error: any) {
+        console.log(`error following user:`, error.data);
+        throw new Error(error);
+
+    }
+
+} 
