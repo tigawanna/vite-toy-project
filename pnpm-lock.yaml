@@ -18,8 +18,8 @@ dependencies:
     specifier: ^5.0.0-alpha.35
     version: 5.0.0-alpha.35(react-dom@18.2.0)(react@18.2.0)
   axios:
-    specifier: ^1.4.0
-    version: 1.4.0
+    specifier: ^1.6.0
+    version: 1.6.0
   class-variance-authority:
     specifier: ^0.6.0
     version: 0.6.0(typescript@5.1.3)
@@ -43,10 +43,10 @@ dependencies:
     version: 18.2.0(react@18.2.0)
   shadcn-fe-tw:
     specifier: link:C:/Users/denni/Desktop/code/workspace/shadcn-ui-fanedition/packages/tw
-    version: link:../../workspace/shadcn-ui-fanedition/packages/tw
+    version: link:C:/Users/denni/Desktop/code/workspace/shadcn-ui-fanedition/packages/tw
   shadcn-fe-ui:
     specifier: link:C:/Users/denni/Desktop/code/workspace/shadcn-ui-fanedition/packages/ui
-    version: link:../../workspace/shadcn-ui-fanedition/packages/ui
+    version: link:C:/Users/denni/Desktop/code/workspace/shadcn-ui-fanedition/packages/ui
   tailwind-merge:
     specifier: ^1.13.2
     version: 1.13.2
@@ -90,7 +90,7 @@ devDependencies:
     version: 8.4.24
   shadcn-fe-cli:
     specifier: link:C:/Users/denni/Desktop/code/workspace/shadcn-ui-fanedition/packages/cli
-    version: link:../../workspace/shadcn-ui-fanedition/packages/cli
+    version: link:C:/Users/denni/Desktop/code/workspace/shadcn-ui-fanedition/packages/cli
   tailwindcss:
     specifier: ^3.3.2
     version: 3.3.2
@@ -1557,8 +1557,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /axios@1.4.0:
-    resolution: {integrity: sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==}
+  /axios@1.6.0:
+    resolution: {integrity: sha512-EZ1DYihju9pwVB+jg67ogm+Tmqc6JmhamRN6I4Zt8DfZu5lbcQGw3ozH9lFejSJgs/ibaef3A9PMXPLeefFGJg==}
     dependencies:
       follow-redirects: 1.15.2
       form-data: 4.0.0
